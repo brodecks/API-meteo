@@ -15,7 +15,11 @@ def getTemperature(ville):
     url = f"https://api.openweathermap.org/data/2.5/weather?q={ville}&appid={API_KEY}&units=metric&lang=fr"
 
     reponse = requests.get(url)
+    if not reponse:
+        print(f"{ville} n'existe pas ou est mal ecrite.")
+        exit(1)
     donnees = reponse.json()
+
     heure_mesure = datetime.fromtimestamp(donnees['dt']).strftime('%H:%M:%S')
     print(f"Données relevées à : {heure_mesure}")
 
